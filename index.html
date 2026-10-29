@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Apply for a loan from QuickCash Zimbabwe Loans. Review the terms and privacy information before submitting an application.">
+  <title>QuickCash Zimbabwe Loans | Loan Application</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand-mark" aria-hidden="true">QC</div>
+    <div><strong>QuickCash</strong><span>Zimbabwe Loans</span></div>
+    <span class="header-tag">Loan application</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">INDEPENDENT LENDING SERVICE</p>
+      <h1>Apply for a loan</h1>
+      <p>Tell us about your request. Submitting an application does not guarantee approval. Review the lender’s verified fees, interest rate, repayment schedule and privacy notice before accepting any offer.</p>
+      <div class="amount-highlight"><span>Requested amount</span><strong id="amountDisplay">$5,000</strong></div>
+    </section>
+
+    <section class="card">
+      <form id="loanForm">
+        <label for="amount">How much would you like to borrow?</label>
+        <input id="amount" name="amount" type="range" min="500" max="50000" step="1" value="5000">
+        <div class="range-labels"><span>$500</span><span>$50,000</span></div>
+
+        <div class="form-grid">
+          <div>
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" autocomplete="name" maxlength="100" required>
+          </div>
+          <div>
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="25" placeholder="+263..." required>
+          </div>
+          <div>
+            <label for="employment">Employment status</label>
+            <select id="employment" name="employment" required>
+              <option value="">Select one</option>
+              <option>Employed</option>
+              <option>Self-employed</option>
+              <option>Casual/contract work</option>
+              <option>Unemployed</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="income">Monthly net income (USD)</label>
+            <input id="income" name="income" type="number" min="0" max="10000000" step="0.01" required>
+          </div>
+          <div>
+            <label for="term">Preferred repayment period</label>
+            <select id="term" name="term" required>
+              <option value="">Select period</option>
+              <option value="1 month">1 month</option>
+              <option value="3 months">3 months</option>
+              <option value="6 months">6 months</option>
+              <option value="9 months">9 months</option>
+              <option value="12 months">12 months</option>
+              <option value="18 months">18 months</option>
+              <option value="24 months">24 months</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Before you apply</strong>
+          <p>This initial form does not ask for a National ID, mobile-money PIN, password or one-time password (OTP). Never share a PIN or OTP with a lender or through Telegram. Do not submit until the lender’s legal identity, contact details, fees, interest and repayment terms have been verified.</p>
+        </div>
+
+        <label class="consent">
+          <input type="checkbox" id="consent" required>
+          <span>I agree that QuickCash Zimbabwe Loans may use the information I submit to assess this loan request and contact me about it. I understand that limited application details will be sent to the lender’s private Telegram notification account.</span>
+        </label>
+
+        <button id="submitButton" type="submit">Submit loan application</button>
+        <p id="formStatus" class="status" role="status" aria-live="polite"></p>
+        <p class="small-print">Submitting this form is not a loan agreement and does not mean that a loan has been approved. No fees or charges should be paid until the lender and terms have been independently verified.</p>
+      </form>
+    </section>
+    <footer>
+      <p><strong>QuickCash Zimbabwe Loans</strong> is an independent proposed brand and is not affiliated with or endorsed by EcoCash.</p>
+      <p>Before launch, replace this notice with the lender’s verified legal/business name, physical or service address, contact details, full privacy notice, complaints process, and applicable licensing/regulatory information.</p>
+    </footer>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

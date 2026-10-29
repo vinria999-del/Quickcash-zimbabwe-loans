@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuickCash Admin</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .admin-card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 8px 30px #1028490c}
+    .table-wrap{overflow:auto;margin-top:20px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;padding:11px;border-bottom:1px solid #e5eaf1;white-space:nowrap}th{background:#f3f6fb}.hidden{display:none}.admin-note{font-size:13px;color:#64748b;line-height:1.6}
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="brand-mark">QC</div><div><strong>QuickCash</strong><span>Admin dashboard</span></div></header>
+  <main class="container">
+    <section class="hero"><p class="eyebrow">PRIVATE ADMIN AREA</p><h1>Applications</h1><p>Sign in with the admin password configured in your hosting environment.</p></section>
+    <section class="admin-card">
+      <form id="loginForm">
+        <label for="password">Admin password</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button type="submit" style="margin-top:14px">Load applications</button>
+      </form>
+      <p id="message" class="status" role="status"></p>
+      <p class="admin-note">This starter dashboard is read-only. Keep the admin password private and use a strong unique value. For a public production launch, add stronger access controls and review security, retention, and privacy requirements.</p>
+      <div id="results" class="hidden">
+        <div class="table-wrap"><table><thead><tr><th>Submitted</th><th>Reference</th><th>Name</th><th>Phone</th><th>Amount (USD)</th><th>Income (USD)</th><th>Employment</th><th>Term</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const form = document.querySelector("#loginForm");
+    const message = document.querySelector("#message");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      message.textContent = "Loading…";
+      message.className = "status";
+      document.querySelector("#results").classList.add("hidden");
+      try {
+        const res = await fetch("/api/admin", { headers: { Authorization: "Bearer " + document.querySelector("#password").value } });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Unable to sign in.");
+        const rows = document.querySelector("#rows");
+        rows.replaceChildren();
+        for (const app of data.applications) {
+          const tr = document.createElement("tr");
+          const values = [new Date(app.created_at).toLocaleString(), app.id, app.full_name, app.phone, Number(app.requested_amount).toLocaleString(), Number(app.monthly_income).toLocaleString(), app.employment, app.repayment_term, app.status];
+          for (const value of values) { const td = document.createElement("td"); td.textContent = value ?? ""; tr.appendChild(td); }
+          rows.appendChild(tr);
+        }
+        document.querySelector("#results").classList.remove("hidden");
+        message.textContent = `Loaded ${data.applications.length} application(s).`;
+        message.classList.add("success");
+      } catch (err) { message.textContent = err.message; message.classList.add("error"); }
+    });
+  </script>
+</body>
+</html>
